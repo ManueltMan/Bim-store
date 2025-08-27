@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart | Bim's Store</title>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f8f9fa;
+  color: #222;
+  line-height: 1.6;
+}
+
+
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+}
+
+.navbar span {
+  color: red;
+}
+
+.icons a {
+  margin-left: 15px;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+
+.cart-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.cart-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.cart-container p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+
+.btn {
+  background: red;
+  color: #fff;
+  border: none;
+  padding: .6rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+
+footer {
+  background: #222;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+footer a {
+  color: red;
+  text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h1>Bim's <span>Store</span></h1>
+  <div class="icons">
+    <a href="index.html">🏠</a>
+    <a href="index2.html">🛒</a>
+    <a href="profile.html">👤</a>
+  </div>
+</div>
+
+
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <p>No items in your cart.</p>
+  <button class="btn" onclick="window.location.href='index.html'">Continue Shopping</button>
+</div>
+
+
+<section class="subscribe-section">
+  <h2>Subscribe for More Updates</h2>
+  <p>Get the latest products and news straight to your inbox!</p>
+  <form id="subscribeForm">
+    <input type="email" placeholder="Enter your email" required>
+    <button type="submit" class="btn">Subscribe</button>
+  </form>
+</section>
+
+
+
+<footer>
+  <p>Bim's <span style="color:red;">Store</span> | Powered by <a href="#">Sleekvix</a></p>
+  <p>Best Online Store</p>
+</footer>
+
+</body>
+</html>

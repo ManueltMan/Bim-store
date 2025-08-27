@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bim's Store | Dashboard</title>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f8f9fa;
+  color: #222;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+}
+
+.navbar span {
+  color: red;
+}
+
+.icons a {
+  margin-left: 15px;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  padding: .5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 250px;
+}
+
+.search-box button {
+  background: red;
+  color: #fff;
+  border: none;
+  padding: .5rem 1rem;
+  margin-left: .5rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+.dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.dropdown .item {
+  padding: .7rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown .item:hover {
+  background: #f2f2f2;
+}
+
+
+.hero {
+  max-width: 1200px;
+  margin: 1rem auto;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  position: relative;
+}
+
+.hero-slide img {
+  max-width: 150px;
+  object-fit: contain;
+}
+
+
+.section-container {
+  max-width: 1200px;
+  margin: 6rem auto; 
+  padding: 0 1rem;
+}
+
+.section-container h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1rem;
+  justify-content: center;
+  scroll-snap-type: x mandatory;
+}
+
+.product-card {
+  flex: 0 0 300px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.2s ease;
+  scroll-snap-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  max-width: 100%;
+  margin-bottom: .8rem;
+}
+
+
+.updates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.update-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.update-card .update-img {
+  max-width: 100px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+
+
+
+
+
+footer {
+  background: #222;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+footer a {
+  color: red;
+  text-decoration: none;
+}
+.stagger-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.stagger-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="navbar">
+  <h1>Bim's <span>Store</span></h1>
+  <div class="search-box">
+    <input type="text" placeholder="Search Product..." id="searchInput" autocomplete="off">
+    <div class="dropdown" id="dropdown"></div>
+  </div>
+  <div class="icons">
+    <a href="index2.html">🛒</a>
+    <a href="profile.html">👤</a>
+  </div>
+</div>
+
+
+<section class="hero">
+  <div class="hero-slide active">
+    <div class="content">
+      <h2>Up to 10% Off</h2>
+      <h3>iPhone Xmas Black</h3>
+      <p>Shop the latest tech with amazing deals! Explore iPhones, AirPods, Smart Watches, and more.</p>
+      <button class="btn">Shop Now</button>
+    </div>
+    <img src="MAS.png" alt="iPhone">
+  </div>
+  <div class="hero-slide active">
+    <div class="content">
+      <h2>Up to 10% Off</h2>
+      <h3>Bluethooth Speakers </h3>
+      <p>Shop the latest tech with amazing deals! Explore iPhones, AirPods, Smart Watches, and more.</p>
+      <button class="btn">Shop Now</button>
+    </div>
+    <img src="Wireless-Bluetooth-Speaker-PNG-Free-Download.png" alt="iPhone">
+  </div>
+  <div class="hero-slide">
+    <div class="content">
+      <h2>New Arrivals</h2>
+      <h3>Samsung Galaxy Series</h3>
+      <p>Discover the newest Samsung phones with advanced features and sleek designs.</p>
+      <button class="btn">Shop Samsung</button>
+    </div>
+    <img src="R.png" alt="Samsung">
+  </div>
+  <div class="hero-slide">
+    <div class="content">
+      <h2>Hot Deals</h2>
+      <h3>AirPods Pro</h3>
+      <p>High-quality sound and noise cancellation. Grab your AirPods at special prices today!</p>
+      <button class="btn">Shop AirPods</button>
+    </div>
+    <img src="R (2).png" alt="AirPods">
+  </div>
+</section>
+
+
+<section class="section-container fade-in" id="iPhone">
+  <h2>iPhones</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="MAS.png" alt="iPhone Xmas">
+      <p>iPhone Xmas (6.4 inch, Black)</p>
+      <p><b>$280.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="MAS.png" alt="iPhone 12 Pro">
+      <p>iPhone 12 Pro</p>
+      <p><b>$499.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="MAS.png" alt="iPhone 12 Pro">
+      <p>iPhone 12 Pro</p>
+      <p><b>$499.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="MAS.png" alt="iPhone 12 Pro">
+      <p>iPhone 12 Pro</p>
+      <p><b>$499.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="MAS.png" alt="iPhone 12 Pro">
+      <p>iPhone 12 Pro</p>
+      <p><b>$499.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<section class="section-container fade-in" id="Samsung">
+  <h2>Samsung</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="R.png" alt="Samsung Galaxy S22">
+      <p>Samsung Galaxy S22</p>
+      <p><b>$250.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R.png" alt="Samsung Galaxy S21">
+      <p>Samsung Galaxy S21</p>
+      <p><b>$230.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R.png" alt="Samsung Galaxy S21">
+      <p>Samsung Galaxy S21</p>
+      <p><b>$230.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R.png" alt="Samsung Galaxy S21">
+      <p>Samsung Galaxy S21</p>
+      <p><b>$230.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R.png" alt="Samsung Galaxy S21">
+      <p>Samsung Galaxy S21</p>
+      <p><b>$230.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-container fade-in" id="AirPods">
+  <h2>AirPods</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="pngtree-airpods-png-image_9149137.png" alt="AirPods Pro">
+      <p>AirPods Pro</p>
+      <p><b>$199.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R (2).png" alt="AirPods Pro">
+      <p>AirPods Pro</p>
+      <p><b>$199.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="pngtree-airpods-png-image_9149137.png" alt="AirPods Pro">
+      <p>AirPods Pro</p>
+      <p><b>$199.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R (2).png" alt="AirPods Pro">
+      <p>AirPods Pro</p>
+      <p><b>$199.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="pngtree-airpods-png-image_9149137.png" alt="AirPods Pro">
+      <p>AirPods Pro</p>
+      <p><b>$199.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="R (2).png" alt="AirPods Pro">
+      <p>AirPods Pro</p>
+      <p><b>$199.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-container fade-in" id="Speakers">
+  <h2>Speakers</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="Black-Bluetooth-Speaker-PNG-HD.png" alt="Portable Speaker">
+      <p>Portable Bluetooth Speaker</p>
+      <p><b>$99.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="Wireless-Bluetooth-Speaker-PNG-Free-Download.png" alt="Portable Speaker">
+      <p>Bluetooth Speaker</p>
+      <p><b>$69.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="Black-Bluetooth-Speaker-PNG-HD.png" alt="Portable Speaker">
+      <p>Portable Bluetooth Speaker</p>
+      <p><b>$99.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="Wireless-Bluetooth-Speaker-PNG-Free-Download.png" alt="Portable Speaker">
+      <p>Bluetooth Speaker</p>
+      <p><b>$69.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="Black-Bluetooth-Speaker-PNG-HD.png" alt="Portable Speaker">
+      <p>Portable Bluetooth Speaker</p>
+      <p><b>$99.00</b></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-container fade-in" id="LatestUpdates"> 
+  <h2>Latest Updates</h2>
+  <div class="updates-grid">
+    <div class="update-card">
+      <img src="MAS.png" alt="New iPhone"   class="update-img">
+      <h3>iPhoneX Launched</h3>
+      <p>Experience faster performance and amazing camera quality in the new iPhone 15 Pro.</p>
+      <button class="btn">Learn More</button>
+    </div>
+    <div class="update-card">
+      <img src="R.png" alt="Samsung News" class="update-img">
+      <h3>Samsung Galaxy <br> Z Fold</h3>
+      <p>Samsung unveils its latest foldable smartphone with innovative features and design.</p>
+      <button class="btn">Learn More</button>
+    </div>
+    <div class="update-card">
+      <img src="pngtree-airpods-png-image_9149137.png" alt="AirPods News" class="update-img">
+      <h3>AirPods Gen 4</h3>
+      <p>Apple releases AirPods Gen 4 with improved battery life and noise cancellation.</p>
+      <button class="btn">Learn More</button>
+    </div>
+    <div class="update-card">
+      <img src="Wireless-Bluetooth-Speaker-PNG-Free-Download.png" alt="Speaker News" class="update-img">
+      <h3>Smart Speakers <br> Update</h3>
+      <p>Latest smart speakers now support multi-room audio and voice assistant integration.</p>
+      <button class="btn">Learn More</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="subscribe" style="max-width: 800px; margin: 3rem auto; padding: 2rem 1rem; background: #fff; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center;">
+  <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Subscribe for More Updates</h2>
+  <p style="font-size: 1rem; color: #555; margin-bottom: 1.5rem;">Get the latest products and news straight to your inbox!</p>
+  <form id="subscribeForm" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem;">
+    <input type="email" placeholder="Enter your email" required 
+      style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; width: 250px; outline: none; transition: 0.3s;" 
+      onfocus="this.style.borderColor='red'" onblur="this.style.borderColor='#ccc'">
+    <button type="submit" 
+      style="padding: 0.7rem 1.5rem; border-radius: 25px; background: red; color: #fff; border: none; cursor: pointer; font-weight: bold; transition: 0.3s;" 
+      onmouseover="this.style.background='darkred'" onmouseout="this.style.background='red'">
+      Subscribe
+    </button>
+  </form>
+</section>
+
+
+
+
+
+<footer>
+  <p>Bim's <span style="color:red;">Store</span> | Powered by <a href="#">Sleekvix</a></p>
+  <p>Best Online Store</p>
+</footer>
+
+<script>
+
+const searchInput = document.getElementById('searchInput');
+const dropdown = document.getElementById('dropdown');
+const categories = ["iPhone","Samsung","Speakers","AirPods","Cameras","Fan"];
+
+function showDropdown(items) {
+  dropdown.innerHTML = items.map(item => `<div class="item">${item}</div>`).join('');
+  dropdown.style.display = items.length ? 'block' : 'none';
+}
+
+searchInput.addEventListener('focus', () => showDropdown(categories));
+searchInput.addEventListener('input', () => {
+  const value = searchInput.value.toLowerCase();
+  const filtered = categories.filter(cat => cat.toLowerCase().includes(value));
+  showDropdown(filtered);
+});
+document.addEventListener('click', (e) => {
+  if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.style.display = 'none';
+  }
+});
+
+dropdown.addEventListener('click', (e) => {
+  if(e.target.classList.contains('item')){
+    const category = e.target.textContent;
+    const section = document.getElementById(category);
+    if(section){
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    dropdown.style.display = 'none';
+  }
+});
+
+
+const slides = document.querySelectorAll('.hero-slide');
+let currentSlide = 0;
+
+function showSlide(index) {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slides[index].classList.add('active');
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+setInterval(nextSlide, 3000);
+</script>
+
+</body>
+</html>
